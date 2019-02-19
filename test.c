@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 #include <pthread.h>
 
 void *f(void *arg);
@@ -12,14 +13,14 @@ int main() {
 	fork();
 	
 	while (1) {
-		printf("ciao da main %d\n", pthread_self());
+		printf("hello from main() ppid=%d pid=%d tid=%lu\n", getppid(), getpid(), pthread_self());
 		sleep(1);
 	}
 }
 
 void *f(void *arg) {
 	while (1) {
-		printf("ciao da f %d\n", pthread_self());
+		printf("hello from f() ppid=%d pid=%d tid=%lu\n", getppid(), getpid(), pthread_self());
 		sleep(1);
 	}
 }
